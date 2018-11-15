@@ -1,0 +1,16 @@
+.img-responsive {
+    width: 100vw;
+}
+.welcome {
+    position: relative;
+    text-align: center;
+}
+.title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    opacity: 0.75;
+    font-size: 200px;
+}
