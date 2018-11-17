@@ -4,26 +4,28 @@ const ExifImage = require('exif').ExifImage;
 const dir = "./Pics/"
 let imgArr = [];
 
-fs.readdir(dir, (err, image) => {
-    image.forEach(imageName => {
-        if(imageName.includes(".jpg")) {
-            try {
-                new ExifImage({ image : dir + imageName}, (err, exifData) => {
-                    if (err) {
-                        console.log("ERROR:" + err + "\nIMAGE: " + imageName);
-                    } else {
-                        let newImg = {
-                            name: imageName,
-                            time: exifData.exif.CreateDate
-                        };
-                        // console.log(newImg.name);
-                        imgArr.push(newImg);
+let imgs = fs.readdirSync(dir);
+
+imgs.forEach(image => {
+    if (image.includes(".jpg")) {
+        try {
+            new ExifImage ({ image: dir + image}, (err, exifData) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    let newImg = {
+                        name: image,
+                        time: exifData.exif.CreateDate
                     }
-                });
-            } catch (err) {
-                console.log(err);
-            }
+                    console.log(newImg);
+                    imgArr.push(newImg);
+                    // shows array here
+                    console.log(imgArr);
+                }
+            });
+        } catch (err) {
+            console.log(err);
         }
-    })
+    }
 });
-console.log(imgArr);
+// but if i console.log(imgArr) here it prints out an empty array
