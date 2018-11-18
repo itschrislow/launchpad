@@ -14,7 +14,8 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use('/', express.static('public'));
+app.use(express.static('public'));
+app.use(express.static('test'));
 
 const dir = "./Pics/"
 let imgArr = [];
@@ -29,13 +30,10 @@ imgs.forEach(image => {
                     console.log(err);
                 } else {
                     let newImg = {
-                        name: image,
+                        name: dir + image,
                         time: exifData.exif.CreateDate
                     }
-                    console.log(newImg);
                     imgArr.push(newImg);
-                    // shows array here
-                    // console.log(imgArr);
                 }
             });
         } catch (err) {
@@ -43,12 +41,12 @@ imgs.forEach(image => {
         }
     }
 });
-// but if i console.log(imgArr) here it prints out an empty array
 
-// TODO: sort array
+
 
 app.get('/', (req, res) => {
-    res.send(imgArr);
+    console.log(imgArr);
+    res.status(200).send(imgArr);
 });
 
 const hostname = 'localhost';
