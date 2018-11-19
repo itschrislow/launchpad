@@ -50,12 +50,10 @@ app.get('/', (req, res) => {
     res.status(200).send(imgArr);
 });
 
-// app.get('/public/pics/:img', (req, res) => {
-//     let imgName = imgArr.filter(img => {
-//         return img === req.params;
-//     });
-//     res.send(imgName);
-// });
+app.get('/pics/:img', (req, res) => {
+    let image = imgArr.find(img => img.name===req.params.img);
+    res.status(200).send(image);
+});
 
 const hostname = 'localhost';
 const port = 4000;
