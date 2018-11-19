@@ -1,7 +1,8 @@
 /**
- * To allow user to upload and display pictures:
  * https://medium.com/@deepika.gunda/all-you-need-to-know-about-uploading-and-displaying-pictures-using-node-js-express-js-pug-jade-d89fbeb19947
  */
+/* Image directory */
+const dir = "./pics/"
 /* Read directory */
 const fs = require('fs');
 /* Get image metadata */
@@ -15,43 +16,50 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(express.static('public'));
-app.use(express.static('test'));
 
-const dir = "./Pics/"
 let imgArr = [];
 
-let imgs = fs.readdirSync(dir);
+function loadImages(dir) {
+    let imgs = fs.readdirSync(dir);
 
-imgs.forEach(image => {
-    if (image.includes(".jpg")) {
-        try {
-            new ExifImage ({ image: dir + image}, (err, exifData) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    let newImg = {
-                        name: dir + image,
-                        time: exifData.exif.CreateDate
+    imgs.forEach(image => {
+        if (image.includes(".jpg")) {
+            try {
+                new ExifImage ({ image: dir + image}, (err, exifData) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        let newImg = {
+                            name: dir + image,
+                            time: exifData.exif.CreateDate
+                        }
+                        console.log(newImg);
+                        imgArr.push(newImg);
                     }
-                    imgArr.push(newImg);
-                }
-            });
-        } catch (err) {
-            console.log(err);
+                });
+            } catch (err) {
+                console.log(err);
+            }
         }
-    }
-});
-
-
+    });
+    return imgArr;
+}
 
 app.get('/', (req, res) => {
-    console.log(imgArr);
+    loadImages(dir);
     res.status(200).send(imgArr);
 });
+
+// app.get('/public/pics/:img', (req, res) => {
+//     let imgName = imgArr.filter(img => {
+//         return img === req.params;
+//     });
+//     res.send(imgName);
+// });
 
 const hostname = 'localhost';
 const port = 4000;
 
 app.listen(port, hostname, () => {
-    console.log('Listening on port 4000');
+    console.log('Listening on port 4000 at http://localhost:4000/');
 });

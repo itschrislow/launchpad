@@ -4,8 +4,8 @@
 (function() {
     fetch(`/`)
         .then(res => res.json())
-        .then(images => displayImages(images));
-
+        .then(images => displayImages(images))
+        .catch(err => console.log(err));
     let container = document.getElementById('container');
 
     function displayImages(images) {
@@ -14,9 +14,7 @@
 
     function displayImage(image) {
         let cardDiv = document.createElement('div');
-        col.classList.add('card col-md-4');
-        // let cardContent = document.createElement('div');
-        // card.classList.add('card-content');
+        col.classList.add('col-md-4');
         let anchor = document.createElement('a');
         anchor.classList.add('lightbox');
         anchor.href = image.name;
