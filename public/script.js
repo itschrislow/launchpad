@@ -2,8 +2,10 @@
  * Dynamically load images into gallery
  */
 (function() {
-    fetch(`/`)
+    fetch(`/pictures`)
+        // .then(data => console.log(data.json))
         .then(res => res.json())
+        // .then(images => console.log(images))
         .then(images => displayImages(images))
         .catch(err => console.log(err));
     let container = document.getElementById('container');

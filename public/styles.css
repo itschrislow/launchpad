@@ -23,6 +23,13 @@
 h1:hover {
     opacity: 0.75;
 }
+/* Filter */
+.btn-group {
+    float: right;
+    padding: 40px;
+    margin: 40px;
+    margin-bottom: 0px;
+}
 /* Gallery */
 .body {
     background-image: linear-gradient(to top, #ecedee 0%, #eceeef 75%, #e7e8e9 100%);
