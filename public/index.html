@@ -21,11 +21,12 @@
         <!-- Filter -->
         <div class="filter">
             <div class="btn-group">
-                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Date
-                </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <button class="dropdown-item" type="button">Action</button>
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Time Taken</button>
+                <div class="dropdown-menu dropdown-menu-right" id="dropdown-menu">
+                    <button class="dropdown-item" type="button" onclick="displayAll()">All</button>
+                    <!-- Example -->
+                    <!-- <button class="dropdown-item" type="button">2018:08:01</button> -->
+                    <!-- End of example -->
                 </div>
             </div>
         </div>
@@ -33,21 +34,11 @@
         <div class="gallery" id="jump">
             <div class="row" id="container">
                 <!-- Example -->
-                <!-- <div class="col-md-4">
-                    <a class="lightbox" href="./pics/DSC_1148.jpg">
-                        <img src="./pics/DSC_1148.jpg" alt="Image not found">
+                <div class="col-md-4">
+                    <a class="lightbox" href="./pics/IMG_7147.JPG">
+                        <img src="./pics/IMG_7147.JPG" alt="Image not found">
                     </a>
                 </div>
-                <div class="col-md-4">
-                        <a class="lightbox" href="./pics/DSC_1148.jpg">
-                            <img src="./pics/DSC_1148.jpg" alt="Image not found">
-                        </a>
-                </div>
-                <div class="col-md-4">
-                        <a class="lightbox" href="./pics/DSC_1148.jpg">
-                            <img src="./pics/DSC_1148.jpg" alt="Image not found">
-                        </a>
-                </div> -->
                 <!-- End of example -->
             </div>
         </div>
@@ -57,9 +48,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
-    <script src="script.js"></script>
     <script>
         baguetteBox.run('.gallery');
     </script>
+    <script src="script.js"></script>
 </body>
 </html>
