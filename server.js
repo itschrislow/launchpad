@@ -51,9 +51,9 @@ function loadImages(directory) {
 /* Send image array to script.js */
 app.get('/', (req, res) => {
     let absDir = "/Users/chris/Desktop/Chris 2018/Projects/Launchpad/public/pics/";
-    let arr = loadImages(absDir);
+    // let arr = loadImages(absDir);
     /* To deploy to Heroku */
-    // let arr = loadImages(dir);
+    let arr = loadImages(dir);
     res.status(200).send(arr);
 });
 
