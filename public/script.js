@@ -1,5 +1,6 @@
 let imgArr = [];
 
+/* Recieve image array from server.js */
 (function() {
     fetch(`/pictures`)
         .then(res => res.json())
@@ -13,10 +14,12 @@ let imgArr = [];
 
 let container = document.getElementById('container');
 
+/* Reset filter */
 function displayAll() {
     displayImages(imgArr);
 }
 
+/* Add images dynamically */
 function displayImages(images) {
     container.innerHTML = "";
     images.forEach(image => displayImage(image));
@@ -40,6 +43,7 @@ function displayImage(image) {
 
 let dropdownMenu = document.getElementById('dropdown-menu');
 
+/* Add dates dynamically */
 function addDates(dates) {
     let uniqueDate = [];
     dates.forEach(date => {
@@ -47,6 +51,7 @@ function addDates(dates) {
             uniqueDate.push(date.time);
         }
     })
+    uniqueDate.sort();
     uniqueDate.forEach(date => addDate(date));
 }
 
@@ -62,6 +67,7 @@ function addDate(date) {
     dropdownMenu.appendChild(btn);
 }
 
+/* Filter images based on date */
 function filter(date) {
     let filtered = imgArr.filter(img => img.time === date);
     displayImages(filtered);

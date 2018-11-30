@@ -1,9 +1,3 @@
-/**
- * https://medium.com/@deepika.gunda/all-you-need-to-know-about-uploading-and-displaying-pictures-using-node-js-express-js-pug-jade-d89fbeb19947
- */
-/* Baguette Box */
-const baguetteBox = require('baguettebox.js');
-
 /* Image directory */
 const dir = './pics/';
 
@@ -13,6 +7,7 @@ const fs = require('fs');
 /* Get image metadata */
 const ExifImage = require('exif').ExifImage;
 
+/* Framework */
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -20,25 +15,29 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+/* Statically serve files */
 app.use(express.static('public'));
 
 let imgArr = [];
 
+/* Read images from local directory */
 function loadImages(directory) {
     let imgs = fs.readdirSync(directory);
 
     imgs.forEach(image => {
-        if (image.includes(".JPG")) {
+        if (image.includes(".JPG") || image.includes(".jpg")) {
             try {
                 new ExifImage ({ image: directory + image}, (err, exifData) => {
                     if (err) {
                         console.log(err);
                     } else {
-                        let newImg = {
-                            name: dir + image,
-                            time: exifData.exif.CreateDate.substring(0, 10)
+                        if (exifData.exif.CreateDate != undefined) {
+                            let newImg = {
+                                name: dir + image,
+                                time: exifData.exif.CreateDate.substring(0, 10)
+                            }
+                            imgArr.push(newImg);
                         }
-                        imgArr.push(newImg);
                     }
                 });
             } catch (err) {
@@ -49,11 +48,7 @@ function loadImages(directory) {
     return imgArr;
 }
 
-function filter(date) {
-    let filtered = imgArr.filter(img => img.time === date);
-    return filtered;
-}
-
+/* Send image array to script.js */
 app.get('/pictures', (req, res) => {
     let absDir = "/Users/chris/Desktop/Chris 2018/Projects/Launchpad/public/pics/";
     let arr = loadImages(absDir);
@@ -63,6 +58,7 @@ app.get('/pictures', (req, res) => {
 const hostname = 'localhost';
 const port = 4000;
 
+/* Listen on specified port for requests */
 app.listen(port, hostname, () => {
     console.log('Listening on port 4000 at http://localhost:4000/');
 });
