@@ -2,7 +2,7 @@ let imgArr = [];
 
 /* Recieve image array from server.js */
 (function() {
-    fetch(`/`)
+    fetch(`/pictures`)
         .then(res => res.json())
         .then(images => {
             imgArr = images;

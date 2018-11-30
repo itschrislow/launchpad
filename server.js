@@ -7,7 +7,7 @@ const fs = require('fs');
 /* Get image metadata */
 const ExifImage = require('exif').ExifImage;
 
-/* Framework */
+/* Backend Framework */
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 /* Statically serve files */
-// app.use(express.static('public'));
+app.use(express.static('public'));
 
 let imgArr = [];
 
@@ -49,17 +49,15 @@ function loadImages(directory) {
 }
 
 /* Send image array to script.js */
-app.get('/', (req, res) => {
+app.get('/pictures', (req, res) => {
     let absDir = "/Users/chris/Desktop/Chris 2018/Projects/Launchpad/public/pics/";
-    // let arr = loadImages(absDir);
-    /* To deploy to Heroku */
-    let arr = loadImages(dir);
+    let arr = loadImages(absDir);
     res.status(200).send(arr);
 });
 
-const port = process.env.PORT || 4000;
+const port = 4000;
 
 /* Listen on specified port for requests */
 app.listen(port, () => {
-    console.log('Listening locally on port 4000 at http://localhost:4000/ or on Heroku at ' + port);
+    console.log('Listening locally on port 4000 at http://localhost:4000/');
 });
