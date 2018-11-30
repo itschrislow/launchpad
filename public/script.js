@@ -1,6 +1,3 @@
-/**
- * Dynamically load images into gallery
- */
 let imgArr = [];
 
 (function() {
@@ -23,6 +20,7 @@ function displayAll() {
 function displayImages(images) {
     container.innerHTML = "";
     images.forEach(image => displayImage(image));
+    baguetteBox.run('.gallery');
 }
 
 function displayImage(image) {

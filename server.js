@@ -1,8 +1,11 @@
 /**
  * https://medium.com/@deepika.gunda/all-you-need-to-know-about-uploading-and-displaying-pictures-using-node-js-express-js-pug-jade-d89fbeb19947
  */
+/* Baguette Box */
+const baguetteBox = require('baguettebox.js');
+
 /* Image directory */
-const dir = "./pics/"
+const dir = './pics/';
 
 /* Read directory */
 const fs = require('fs');
@@ -23,7 +26,6 @@ let imgArr = [];
 
 function loadImages(directory) {
     let imgs = fs.readdirSync(directory);
-    // console.log(imgs);
 
     imgs.forEach(image => {
         if (image.includes(".JPG")) {
@@ -36,9 +38,7 @@ function loadImages(directory) {
                             name: dir + image,
                             time: exifData.exif.CreateDate.substring(0, 10)
                         }
-                        // console.log(newImg);
                         imgArr.push(newImg);
-                        // console.log(imgArr);
                     }
                 });
             } catch (err) {
@@ -46,7 +46,6 @@ function loadImages(directory) {
             }
         }
     });
-    // console.log(imgArr);
     return imgArr;
 }
 
