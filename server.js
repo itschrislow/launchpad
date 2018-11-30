@@ -51,14 +51,15 @@ function loadImages(directory) {
 /* Send image array to script.js */
 app.get('/pictures', (req, res) => {
     let absDir = "/Users/chris/Desktop/Chris 2018/Projects/Launchpad/public/pics/";
-    let arr = loadImages(absDir);
+    // let arr = loadImages(absDir);
+    /* To deploy to Heroku */
+    let arr = loadImages(dir);
     res.status(200).send(arr);
 });
 
-const hostname = 'localhost';
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 /* Listen on specified port for requests */
-app.listen(port, hostname, () => {
+app.listen(port, () => {
     console.log('Listening on port 4000 at http://localhost:4000/');
 });
