@@ -49,11 +49,11 @@ function loadImages(directory) {
 }
 
 /* Send image array to script.js */
-app.get('/pictures', (req, res) => {
+app.get('/', (req, res) => {
     let absDir = "/Users/chris/Desktop/Chris 2018/Projects/Launchpad/public/pics/";
-    // let arr = loadImages(absDir);
+    let arr = loadImages(absDir);
     /* To deploy to Heroku */
-    let arr = loadImages(dir);
+    // let arr = loadImages(dir);
     res.status(200).send(arr);
 });
 
@@ -61,5 +61,5 @@ const port = process.env.PORT || 4000;
 
 /* Listen on specified port for requests */
 app.listen(port, () => {
-    console.log('Listening on port 4000 at http://localhost:4000/');
+    console.log('Listening locally on port 4000 at http://localhost:4000/ or on Heroku at ' + port);
 });
